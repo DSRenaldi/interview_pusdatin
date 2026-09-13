@@ -1,0 +1,8 @@
+__pycache__/
+.venv/
+*.pyc
+presentation/
+scripts/build_presentation.py
+reports/presentation_script.md
+PERSISTENT_MEMORY.md
+reports

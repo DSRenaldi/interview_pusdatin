@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Dashboard eksploratif kesiapan ekosistem pendidikan tinggi Indonesia berdasarkan dataset publik Pusdatin Kemdiktisaintek.">
+  <title>Peta Kesiapan Pendidikan Tinggi 2025</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Lewati ke konten utama</a>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Beranda dashboard">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span><strong>Ruang Data</strong><small>Prototipe analisis Pusdatin</small></span>
+    </a>
+    <nav aria-label="Navigasi utama">
+      <a href="#wilayah">Wilayah</a>
+      <a href="#struktur">Struktur</a>
+      <a href="#kualitas">Kualitas data</a>
+    </nav>
+    <span class="edition">Edisi 2025</span>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Decision brief · 34 provinsi</p>
+        <h1 id="hero-title">Tidak semua wilayah membutuhkan <em>intervensi yang sama.</em></h1>
+        <p class="lede">Empat sinyal—mutu institusi, lulusan STEM, jenjang akademik dosen, dan sertifikasi—dirangkai untuk membantu menemukan celah kebijakan yang berbeda di tiap wilayah.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#wilayah">Jelajahi wilayah</a>
+          <a class="button text" href="#metode">Baca batas analisis <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="Catatan penting">
+        <span class="note-label">Cara membaca</span>
+        <p>Ini alat eksplorasi untuk memprioritaskan pertanyaan, <strong>bukan peringkat resmi</strong> atau ukuran kinerja pemerintah daerah.</p>
+      </aside>
+    </section>
+
+    <section class="pulse" aria-labelledby="pulse-title">
+      <div class="section-heading compact">
+        <div><p class="eyebrow">Potret nasional</p><h2 id="pulse-title">Basis keputusan</h2></div>
+        <p>Jumlah setelah pembersihan data</p>
+      </div>
+      <div class="pulse-grid" id="national-pulse" aria-live="polite"></div>
+    </section>
+
+    <section class="ribbon-section" aria-labelledby="ribbon-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">Spektrum kesiapan</p><h2 id="ribbon-title">Satu negara, empat celah</h2></div>
+        <p>Setiap garis mewakili provinsi. Pilih satu untuk membuka profilnya.</p>
+      </div>
+      <div class="ribbon-key" aria-hidden="true"><span>Lebih banyak gap</span><span>Lebih sedikit gap</span></div>
+      <div class="ribbon-chart">
+        <div class="ribbon-axis" aria-hidden="true"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
+        <div id="readiness-ribbon" class="readiness-ribbon" role="list" aria-label="Provinsi menurut skor peringkat empat indikator"></div>
+      </div>
+    </section>
+
+    <section class="province-lab" id="wilayah" aria-labelledby="province-title">
+      <div class="lab-header">
+        <div>
+          <p class="eyebrow">Profil wilayah</p>
+          <h2 id="province-title">Bedah satu provinsi</h2>
+        </div>
+        <label class="select-wrap">Pilih provinsi
+          <select id="province-select"></select>
+        </label>
+      </div>
+      <div class="province-summary">
+        <div>
+          <p class="province-status" id="province-status"></p>
+          <h3 id="province-name"></h3>
+          <p id="province-narrative"></p>
+        </div>
+        <div class="score-stamp" aria-label="Skor kesiapan eksploratif">
+          <span>Skor peringkat</span><strong id="province-score">—</strong><small>/ 100</small>
+        </div>
+      </div>
+      <div class="metric-tracks" id="metric-tracks"></div>
+      <div class="indicator-ranks" id="indicator-ranks" aria-label="Jumlah absolut dan peringkat indikator provinsi"></div>
+      <div class="province-volume" id="province-volume"></div>
+    </section>
+
+    <section class="structure" id="struktur" aria-labelledby="structure-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">Struktur nasional</p><h2 id="structure-title">Apa yang membentuk angka?</h2></div>
+        <p>Distribusi absolut untuk menjaga konteks di balik persentase.</p>
+      </div>
+      <div class="structure-grid">
+        <article class="chart-panel">
+          <div class="panel-title"><span>01</span><div><h3>Akreditasi perguruan tinggi</h3><p>Jumlah institusi per kategori</p></div></div>
+          <div class="bar-chart" id="accreditation-chart"></div>
+        </article>
+        <article class="chart-panel">
+          <div class="panel-title"><span>02</span><div><h3>Lulusan per bidang</h3><p>STEM dan non-STEM</p></div></div>
+          <div class="bar-chart fields" id="field-chart"></div>
+        </article>
+        <article class="chart-panel wide">
+          <div class="panel-title"><span>03</span><div><h3>Kuadran pengembangan dosen</h3><p>Sertifikasi vs dosen senior per provinsi · ukuran titik menunjukkan jumlah dosen</p></div></div>
+          <div class="quadrant-layout">
+            <span class="quadrant-y-title">Dosen senior (%)</span>
+            <div class="lecturer-quadrant" id="lecturer-quadrant" role="group" aria-label="Kuadran persentase dosen bersertifikasi dan dosen senior per provinsi"></div>
+            <span class="quadrant-x-title">Dosen bersertifikasi (%)</span>
+          </div>
+          <div class="quadrant-legend" aria-label="Legenda kuadran dosen">
+            <span><i class="legend-dot priority"></i>Prioritas</span>
+            <span><i class="legend-dot attention"></i>Perlu perhatian</span>
+            <span><i class="legend-dot strong"></i>Relatif kuat</span>
+            <span><i class="legend-line"></i>Nilai nasional</span>
+          </div>
+          <div class="quadrant-insights" id="quadrant-insights"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="priority" aria-labelledby="priority-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">Daftar kerja</p><h2 id="priority-title">Matriks prioritas wilayah</h2><p class="table-explainer">Gap berarti indikator wilayah berada di bawah nilai nasional. Angka menunjukkan nilai wilayah.</p></div>
+        <div class="table-tools">
+          <label>Cari provinsi <input id="province-search" type="search" placeholder="Contoh: Papua"></label>
+          <label>Status <select id="priority-filter"><option value="all">Semua</option><option>Prioritas</option><option>Perlu perhatian</option><option>Relatif kuat</option></select></label>
+        </div>
+      </div>
+      <div class="table-wrap" tabindex="0" aria-label="Tabel dapat digulir secara horizontal">
+        <table>
+          <caption class="sr-only">Matriks prioritas provinsi berdasarkan empat indikator kualitas dan kapasitas pendidikan tinggi</caption>
+          <thead><tr><th scope="col">#</th><th scope="col">Provinsi</th><th scope="col">Status</th><th scope="col">Gap</th><th scope="col">Skor peringkat</th><th scope="col">Akreditasi puncak</th><th scope="col">Lulusan STEM</th><th scope="col">Dosen senior</th><th scope="col">Sertifikasi</th></tr></thead>
+          <tbody id="priority-body"></tbody>
+        </table>
+      </div>
+      <p class="table-note"><span class="legend-swatch gap"></span> Di bawah nilai nasional &nbsp;&nbsp; <span class="legend-swatch above"></span> Di atas atau sama dengan nilai nasional</p>
+    </section>
+
+    <section class="quality" id="kualitas" aria-labelledby="quality-title">
+      <div class="quality-intro">
+        <p class="eyebrow">Data quality gate</p>
+        <h2 id="quality-title">Keputusan yang baik dimulai sebelum dashboard.</h2>
+        <p>Empat pemeriksaan sederhana menemukan struktur kolom yang tidak konsisten, nilai kosong, dan kategori nonstandar. Semua keputusan pembersihan dicatat agar analisis dapat diaudit.</p>
+      </div>
+      <div class="quality-list" id="quality-list"></div>
+    </section>
+
+    <section class="method" id="metode" aria-labelledby="method-title">
+      <div><p class="eyebrow">Metodologi & batasan</p><h2 id="method-title">Transparan sejak awal</h2></div>
+      <div class="method-columns">
+        <div><h3>Definisi</h3><p>Akreditasi puncak = Unggul atau A. Dosen senior = Lektor Kepala atau Profesor. Skor adalah rata-rata percentile rank empat indikator dengan bobot sama; bukan indeks resmi.</p></div>
+        <div><h3>Cakupan</h3><p>Empat dataset publik tahun 2025 sama-sama memuat 34 provinsi. Empat provinsi baru di Papua belum tampil sebagai kategori terpisah, sehingga hasil tidak boleh dibaca sebagai cakupan administratif 38 provinsi.</p></div>
+        <div><h3>Interpretasi</h3><p>Hubungan antarindikator bersifat deskriptif, bukan kausal. Total dosen mengikuti basis dua dataset terpilih dan perlu direkonsiliasi dengan statistik resmi sebelum dipakai untuk keputusan operasional.</p></div>
+      </div>
+      <p class="source-line">Sumber: <a href="https://data.kemdiktisaintek.go.id/dataset" target="_blank" rel="noreferrer">Portal Data Kemdiktisaintek</a> · Diolah dari empat dataset publik · Pipeline tersedia di repositori ini.</p>
+    </section>
+  </main>
+
+  <footer><span>Prototipe portofolio Data Analyst</span><span>Pusdatin Kemdiktisaintek · 2026</span></footer>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
