@@ -151,16 +151,11 @@
     $('#priority-body').innerHTML = rows.length ? rows.map((p, index) => `<tr><td class="rank-cell">${index + 1}</td><td><strong>${p.provinsi}</strong></td><td><span class="status-dot" style="--status:${statusColor[p.prioritas]}"></span>${p.prioritas}</td><td class="gap-cell">${p.jumlah_gap}<span>/4</span></td><td class="score-cell">${Number(p.skor_kesiapan).toLocaleString('id-ID', {maximumFractionDigits: 1})}</td>${metricCell(p, 'persen_akreditasi_puncak')}${metricCell(p, 'persen_lulusan_stem')}${metricCell(p, 'persen_dosen_senior')}${metricCell(p, 'persen_dosen_bersertifikasi')}</tr>`).join('') : '<tr><td class="empty-row" colspan="9">Tidak ada provinsi yang cocok dengan filter.</td></tr>';
   }
 
-  function renderQuality() {
-    $('#quality-list').innerHTML = data.quality.map((row) => `<article class="quality-item"><div><h3>${row.dataset}</h3><p>${row.note}</p></div><div><strong>${fmt.format(row.rows_used)} / ${fmt.format(row.rows_raw)}</strong><small>baris dipakai</small></div></article>`).join('');
-  }
-
   renderPulse();
   renderRibbon();
   setupProvincePicker();
   renderStructure();
   renderTable();
-  renderQuality();
   $('#province-search').addEventListener('input', renderTable);
   $('#priority-filter').addEventListener('change', renderTable);
 })();
